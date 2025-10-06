@@ -57,7 +57,7 @@ def simple_form_test(cap):
         output_message = driver.find_element(By.ID, "message").text
 
         assert output_message == message
-        print(f"✅ {cap['name']}: Simple Form Test Passed!")
+        print(f"{cap['name']}: Simple Form Test Passed!")
 
     finally:
         driver.quit()
