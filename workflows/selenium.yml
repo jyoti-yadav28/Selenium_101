@@ -1,0 +1,48 @@
+name: LambdaTest Selenium CI with Tunnel
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  selenium-tests:
+    runs-on: ubuntu-latest
+    steps:
+      # 1️⃣ Checkout repository
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # 2️⃣ Setup Python
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.11
+
+      # 3️⃣ Install dependencies
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install selenium
+
+      # 4️⃣ Start LambdaTest Tunnel
+      - name: Start LambdaTest Tunnel
+        run: |
+          wget https://downloads.lambdatest.com/tunnel/v3.0.0/LT_Tunnel_linux_64.zip
+          unzip LT_Tunnel_linux_64.zip
+          chmod +x LT
+          ./LT --user $LT_USERNAME --key $LT_ACCESS_KEY &
+          echo "Waiting for tunnel to be ready..."
+          sleep 15  # wait for tunnel to initialize
+        env:
+          LT_USERNAME: ${{ secrets.jyotiyadav }}
+          LT_ACCESS_KEY: ${{ secrets.LT_QADsSrkYtrtgR0gOQKfoxZuVqQTm1DXlbHy0Vo9JkOzJwpe }}
+
+      # 5️⃣ Run Selenium tests
+      - name: Run Selenium tests
+        env:
+          LT_USERNAME: ${{ secrets.jyotiyadav }}
+          LT_ACCESS_KEY: ${{ secrets.LT_QADsSrkYtrtgR0gOQKfoxZuVqQTm1DXlbHy0Vo9JkOzJwpe }}
+        run: |
+          python assignment.py
