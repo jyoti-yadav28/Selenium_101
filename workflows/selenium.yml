@@ -38,13 +38,13 @@ jobs:
           echo "Waiting for tunnel to be ready..."
           sleep 15
         env:
-          LT_USERNAME: ${{ secrets.LT_USERNAME }}
-          LT_ACCESS_KEY: ${{ secrets.LT_ACCESS_KEY }}
+          LT_USERNAME: ${{ secrets.jyotiyadav}}
+          LT_ACCESS_KEY: ${{ secrets.LT_QADsSrkYtrtgR0gOQKfoxZuVqQTm1DXlbHy0Vo9JkOzJwpe}}
 
       # 5️⃣ Run Selenium tests
       - name: Run Selenium tests
         env:
-          LT_USERNAME: ${{ secrets.LT_USERNAME }}
-          LT_ACCESS_KEY: ${{ secrets.LT_ACCESS_KEY }}
+          LT_USERNAME: ${{ secrets.jyotiyadav}}
+          LT_ACCESS_KEY: ${{ secrets.LT_QADsSrkYtrtgR0gOQKfoxZuVqQTm1DXlbHy0Vo9JkOzJwpe}}
         run: |
           python assignment.py
