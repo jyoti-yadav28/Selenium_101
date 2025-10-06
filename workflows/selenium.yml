@@ -5,6 +5,8 @@ on:
     branches: [ main ]
   pull_request:
     branches: [ main ]
+  schedule:
+    - cron: "*/5 * * * *"  # every 5 minutes
 
 jobs:
   selenium-tests:
@@ -34,15 +36,15 @@ jobs:
           chmod +x LT
           ./LT --user $LT_USERNAME --key $LT_ACCESS_KEY &
           echo "Waiting for tunnel to be ready..."
-          sleep 15  # wait for tunnel to initialize
+          sleep 15
         env:
-          LT_USERNAME: ${{ secrets.jyotiyadav }}
-          LT_ACCESS_KEY: ${{ secrets.LT_QADsSrkYtrtgR0gOQKfoxZuVqQTm1DXlbHy0Vo9JkOzJwpe }}
+          LT_USERNAME: ${{ secrets.LT_USERNAME }}
+          LT_ACCESS_KEY: ${{ secrets.LT_ACCESS_KEY }}
 
       # 5️⃣ Run Selenium tests
       - name: Run Selenium tests
         env:
-          LT_USERNAME: ${{ secrets.jyotiyadav }}
-          LT_ACCESS_KEY: ${{ secrets.LT_QADsSrkYtrtgR0gOQKfoxZuVqQTm1DXlbHy0Vo9JkOzJwpe }}
+          LT_USERNAME: ${{ secrets.LT_USERNAME }}
+          LT_ACCESS_KEY: ${{ secrets.LT_ACCESS_KEY }}
         run: |
           python assignment.py
