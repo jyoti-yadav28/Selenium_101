@@ -29,12 +29,12 @@ jobs:
           pip install selenium
 
       # 4️⃣ Start LambdaTest Tunnel
-      - name: Start LambdaTest Tunnel
+      - name: Start LambdaTunnel
         run: |
           wget https://downloads.lambdatest.com/tunnel/v3.0.0/LT_Tunnel_linux_64.zip
           unzip LT_Tunnel_linux_64.zip
           chmod +x LT
-          ./LT --user $LT_USERNAME --key $LT_ACCESS_KEY &
+          ./LT --user $jyotiyadav --key $LT_QADsSrkYtrtgR0gOQKfoxZuVqQTm1DXlbHy0Vo9JkOzJwpe &
           echo "Waiting for tunnel to be ready..."
           sleep 15
         env:
